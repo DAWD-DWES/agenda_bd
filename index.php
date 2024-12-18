@@ -1,9 +1,10 @@
 <?php
-define('NOMBRE_INVALIDO', '**Nombre inválido');
-define('TELEFONO_INVALIDO', '**Teléfono inválido');
-
+include_once 'error_handler.php';
 require_once 'funciones_bd.php';
 $bd = require_once 'conexion.php';
+
+define('NOMBRE_INVALIDO', '**Nombre inválido');
+define('TELEFONO_INVALIDO', '**Teléfono inválido');
 
 if (filter_has_var(INPUT_POST, 'crear_contacto')) {
     $nombre = trim(filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS));
