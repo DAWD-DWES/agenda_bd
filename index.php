@@ -30,7 +30,7 @@ if (filter_has_var(INPUT_POST, 'crear_contacto')) {
         error_log("Error al borrar el contacto" . $ex->getMessage());
         $contactoBorrado = false;
     }
-} else if (filter_has_var(INPUT_POST, 'limpiar')) {
+} else if (filter_has_var(INPUT_GET, 'limpiar_contactos') || filter_has_var(INPUT_POST, 'limpiar_contactos')) {
     try {
         $contactosBorrados = borrarContactos($bd);
     } catch (PDOException $ex) {
@@ -120,8 +120,11 @@ $bd = null;
             <?php if (!empty($agenda)): ?>
                 <fieldset>
                     <legend>Vaciar Agenda</legend>
-                <!--   <a class="submit red button" href="<?= "{$_SERVER['PHP_SELF']}?limpiar=1" ?>">Vaciar</a> -->
-                    <input type="submit" class="submit red" name="limpiar"  value="Vaciar">
+               <input class="submit red" type="submit" value="Vaciar Agenda" name="limpiar_contactos">
+                            <!-- Otras maneras de enviar la petición al servidor 
+                            <input class="submit red" type="submit" formaction="<?= "{$_SERVER['PHP_SELF']}?limpiar_contactos" ?>"  value="Vaciar Agenda">
+                            <a href="<?= "{$_SERVER['PHP_SELF']}?limpiar_contactos" ?>"><input type="button" class="submit red" value="Vaciar Agenda"></a>
+                            <a class="submit red button" href="<?= "{$_SERVER['PHP_SELF']}?limpiar_contactos" ?>">Vaciar Agenda</a> -->
                 </fieldset>
             <?php endif ?>
         </form>
